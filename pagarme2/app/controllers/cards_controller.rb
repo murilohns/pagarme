@@ -35,11 +35,11 @@ class CardsController < ApplicationController
 
     card.create
 
-    card_id = card.id
+    @card.id = card.id
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
+        format.html { redirect_to @card, notice: 'Card was successfully created.#{card_id}' }
         format.json { render :show, status: :created, location: @card }
       else
         format.html { render :new }

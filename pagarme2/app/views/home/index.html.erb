@@ -2,5 +2,7 @@
 <p>Find me in app/views/home/index.html.erb</p>
 <%= link_to "Sair", destroy_member_session_path, method: :delete %>
 <%= link_to "Cartões", cards_path %>
+<%= link_to "Recebedores", recipients_path %>
 <%= current_member.email %>
 <%= current_member.id %>
+<%= current_member.name %>

@@ -1,7 +1,5 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
-  PagarMe.api_key        = 'ak_test_H3FoOSypyOOXc2fcXHpiymRWx8tnKW'
-  PagarMe.encryption_key = 'ek_test_isRGBmcfKUcxymEKQhrqEQfeHNFv9n' # If needed
   require 'pagarme'
   # GET /cards
   # GET /cards.json

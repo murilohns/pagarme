@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bank code:</strong>
+  <%= @recipient.bank_code %>
+</p>
+
+<p>
+  <strong>Agencia:</strong>
+  <%= @recipient.agencia %>
+</p>
+
+<p>
+  <strong>Agencia dv:</strong>
+  <%= @recipient.agencia_dv %>
+</p>
+
+<p>
+  <strong>Conta:</strong>
+  <%= @recipient.conta %>
+</p>
+
+<p>
+  <strong>Conta dv:</strong>
+  <%= @recipient.conta_dv %>
+</p>
+
+<p>
+  <strong>Legal name:</strong>
+  <%= @recipient.legal_name %>
+</p>
+
+<p>
+  <strong>Document number:</strong>
+  <%= @recipient.document_number %>
+</p>
+
+<p>
+  <strong>Transfer enabled:</strong>
+  <%= @recipient.transfer_enabled %>
+</p>
+
+<%= link_to 'Edit', edit_recipient_path(@recipient) %> |
+<%= link_to 'Back', recipients_path %>

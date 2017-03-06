@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :transactions
+  resources :recipients
   get 'home/index'
   root 'home#index'
   

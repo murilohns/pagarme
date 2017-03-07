@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :addresses
+  resources :information
   resources :transactions
   get 'transaction/new'
 

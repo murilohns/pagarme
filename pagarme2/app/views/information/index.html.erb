@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Information</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Street</th>
+      <th>Neighborhood</th>
+      <th>Zipcode</th>
+      <th>Street number</th>
+      <th>Complementary</th>
+      <th>Ddd</th>
+      <th>Phone number</th>
+      <th>Member</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @information.each do |information| %>
+      <tr>
+        <td><%= information.street %></td>
+        <td><%= information.neighborhood %></td>
+        <td><%= information.zipcode %></td>
+        <td><%= information.street_number %></td>
+        <td><%= information.complementary %></td>
+        <td><%= information.ddd %></td>
+        <td><%= information.phone_number %></td>
+        <td><%= information.member %></td>
+        <td><%= link_to 'Show', information %></td>
+        <td><%= link_to 'Edit', edit_information_path(information) %></td>
+        <td><%= link_to 'Destroy', information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Information', new_information_path %>

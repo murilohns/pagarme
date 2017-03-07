@@ -6,13 +6,23 @@
 </p>
 
 <p>
-  <strong>Payment method:</strong>
-  <%= @transaction.payment_method %>
+  <strong>Pay method:</strong>
+  <%= @transaction.pay_method %>
 </p>
 
 <p>
-  <strong>Recipient:</strong>
-  <%= @transaction.recipient %>
+  <strong>Member:</strong>
+  <%= @transaction.member %>
+</p>
+
+<p>
+  <strong>Boleto url:</strong>
+  <%= @transaction.boleto_url %>
+</p>
+
+<p>
+  <strong>Boleto barcode:</strong>
+  <%= @transaction.boleto_barcode %>
 </p>
 
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |

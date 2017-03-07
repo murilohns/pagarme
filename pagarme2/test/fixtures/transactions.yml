@@ -2,10 +2,14 @@
 
 one:
   amount: 1
-  payment_method: MyString
-  recipient: one
+  pay_method: MyString
+  member: one
+  boleto_url: MyText
+  boleto_barcode: MyText
 
 two:
   amount: 1
-  payment_method: MyString
-  recipient: two
+  pay_method: MyString
+  member: two
+  boleto_url: MyText
+  boleto_barcode: MyText

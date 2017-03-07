@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   
+  resources :addresses
   resources :transactions
+  get 'transaction/new'
+
   resources :recipients
   get 'home/index'
-  root 'home#index'
+  root 'cards#index'
   
   resources :cards
   devise_for :members

@@ -17,16 +17,82 @@
   </div>
 
   <div class="field">
-    <%= f.label :payment_method %>
-    <%= f.text_field :payment_method %>
+    <label for="boleto">Boleto</label>
+    <%= f.radio_button(:pay_method, "boleto") %>
+    <label for="credit_card">Cartão de Crédito</label>
+    <%= f.radio_button(:pay_method, "credit_card") %>
   </div>
+  
+  <div id="creditCard_form" class="creditCard_form">
+    Número do cartão: <input type="text" id="card_number" maxlength="19"/>
+    <br/>
+    Nome (como escrito no cartão): <input type="text" id="card_holder_name"  maxlength="60"/>
+    <br/>
+    Mês de expiração: <input type="text" id="card_expiration_month"  maxlength="2"/>
+    <br/>
+    Ano de expiração: <input type="text" id="card_expiration_year" maxlength="2"/>
+    <br/>
+    Código de segurança: <input type="text" id="card_cvv" maxlength="3"/>
+    <br/>
+    <div id="field_errors">
+    </div>
+    <br/>
 
-  <div class="field">
-    <%= f.label :recipient_id %>
-    <%= f.text_field :recipient_id %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+    <div class="actions">
+    </div>
+    
+    <div class="actions">
+      <%= f.submit %>
+    </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+$(document).ready(function() { // quando o jQuery estiver carregado...
+    
+    $("div.creditCard_form").hide();
+    
+    $("input[name$='transaction[pay_method]'").click(function() {
+            $("div.creditCard_form").hide();
+            $("#creditCard_form").show();
+    });
+
+    PagarMe.encryption_key = "ek_test_isRGBmcfKUcxymEKQhrqEQfeHNFv9n";
+
+    var form = $("#new_transaction");
+
+    form.submit(function(event) { // quando o form for enviado...
+        // inicializa um objeto de cartão de crédito e completa
+        // com os dados do form
+        var creditCard = new PagarMe.creditCard();
+        creditCard.cardHolderName = $("#new_transaction #card_holder_name").val();
+        creditCard.cardExpirationMonth = $("#new_transaction #card_expiration_month").val();
+        creditCard.cardExpirationYear = $("#new_transaction #card_expiration_year").val();
+        creditCard.cardNumber = $("#new_transaction #card_number").val();
+        creditCard.cardCVV = $("#new_transaction #card_cvv").val();
+
+        // pega os erros de validação nos campos do form
+        var fieldErrors = creditCard.fieldErrors();
+
+        //Verifica se há erros
+        var hasErrors = false;
+        for(var field in fieldErrors) { hasErrors = true; break; }
+
+        if(hasErrors) {
+            // realiza o tratamento de errors
+            alert(fieldErrors);
+        } else {
+            // se não há erros, gera o card_hash...
+            creditCard.generateHash(function(cardHash) {
+                // ...coloca-o no form...
+                form.append($('<input type="text" name="transaction[card_hash]" id="transaction_card_hash">').val(cardHash));
+                // e envia o form
+                form.get(0).submit();
+            });
+        }
+
+        return false;
+    });
+});
+</script>
+

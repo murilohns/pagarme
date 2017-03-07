@@ -4,7 +4,7 @@ class CardsController < ApplicationController
   # GET /cards
   # GET /cards.json
   def index
-    @cards = Card.all
+    @member_card = Member.find(current_member)
   end
 
   # GET /cards/1
@@ -28,7 +28,7 @@ class CardsController < ApplicationController
     @card.member = current_member
 
     card = PagarMe::Card.new({
-    :card_hash => @card.card_hash
+      :card_hash => @card.card_hash
     })
 
     card.create
@@ -37,7 +37,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.#{card_id}' }
+        format.html { redirect_to new_transaction_path, notice: 'Card was successfully created.#{card_id}' }
         format.json { render :show, status: :created, location: @card }
       else
         format.html { render :new }

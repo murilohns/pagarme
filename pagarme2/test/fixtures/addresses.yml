@@ -6,6 +6,8 @@ one:
   zipcode: MyString
   street_number: MyString
   complementary: MyString
+  ddd: MyString
+  phone_number: MyString
   member: one
 
 two:
@@ -14,4 +16,6 @@ two:
   zipcode: MyString
   street_number: MyString
   complementary: MyString
+  ddd: MyString
+  phone_number: MyString
   member: two

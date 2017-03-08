@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20170307201613) do
   enable_extension "plpgsql"
 
   create_table "information", force: :cascade do |t|
+    t.string   "document_number"
     t.string   "street"
     t.string   "neighborhood"
     t.string   "zipcode"
@@ -24,8 +25,8 @@ ActiveRecord::Schema.define(version: 20170307201613) do
     t.string   "ddd"
     t.string   "phone_number"
     t.integer  "member_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["member_id"], name: "index_information_on_member_id", using: :btree
   end
 

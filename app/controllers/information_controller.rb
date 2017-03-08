@@ -29,7 +29,7 @@ class InformationController < ApplicationController
 
     respond_to do |format|
       if @information.save
-        format.html { redirect_to @information, notice: 'Information was successfully created.' }
+        format.html { redirect_to new_information_path, notice: 'Information was successfully created.' }
         format.json { render :show, status: :created, location: @information }
       else
         format.html { render :new }

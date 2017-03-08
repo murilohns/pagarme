@@ -28,7 +28,7 @@
         <td><%= @information.complementary %></td>
         <td><%= @information.ddd %></td>
         <td><%= @information.phone_number %></td>
-        <td><%= @information.member %></td>
+        <td><%= @information.member.name %></td>
         <td><%= link_to 'Show', @information %></td>
         <td><%= link_to 'Edit', edit_information_path(@information) %></td>
         <td><%= link_to 'Destroy', @information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -38,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Information', new_information_path %>
+<%= link_to 'Nova Transação', new_transaction_path %>

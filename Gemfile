@@ -26,6 +26,8 @@ gem 'devise'
 gem 'devise-i18n'
 #Pagar.Me gem
 gem 'pagarme'
+#Bootstrap Gem
+gem 'rails-assets-bootstrap', source: 'https://rails-assets.org'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

@@ -15,14 +15,6 @@ ActiveRecord::Schema.define(version: 20170307201613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cards", force: :cascade do |t|
-    t.integer  "member_id"
-    t.string   "card_hash"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["member_id"], name: "index_cards_on_member_id", using: :btree
-  end
-
   create_table "information", force: :cascade do |t|
     t.string   "street"
     t.string   "neighborhood"
@@ -82,7 +74,6 @@ ActiveRecord::Schema.define(version: 20170307201613) do
     t.index ["member_id"], name: "index_transactions_on_member_id", using: :btree
   end
 
-  add_foreign_key "cards", "members"
   add_foreign_key "information", "members"
   add_foreign_key "transactions", "members"
 end

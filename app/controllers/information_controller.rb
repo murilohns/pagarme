@@ -4,7 +4,7 @@ class InformationController < ApplicationController
   # GET /information
   # GET /information.json
   def index
-    @information = Information.find(current_member)
+    @information = current_member.information
   end
 
   # GET /information/1

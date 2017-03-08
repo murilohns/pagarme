@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Document Number</th>
       <th>Street</th>
       <th>Neighborhood</th>
       <th>Zipcode</th>
@@ -18,22 +19,21 @@
   </thead>
 
   <tbody>
-    <% @information.each do |information| %>
       <tr>
-        <td><%= information.street %></td>
-        <td><%= information.neighborhood %></td>
-        <td><%= information.zipcode %></td>
-        <td><%= information.street_number %></td>
-        <td><%= information.complementary %></td>
-        <td><%= information.ddd %></td>
-        <td><%= information.phone_number %></td>
-        <td><%= information.member %></td>
-        <td><%= link_to 'Show', information %></td>
-        <td><%= link_to 'Edit', edit_information_path(information) %></td>
-        <td><%= link_to 'Destroy', information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= @information.document_number %></td>
+        <td><%= @information.street %></td>
+        <td><%= @information.neighborhood %></td>
+        <td><%= @information.zipcode %></td>
+        <td><%= @information.street_number %></td>
+        <td><%= @information.complementary %></td>
+        <td><%= @information.ddd %></td>
+        <td><%= @information.phone_number %></td>
+        <td><%= @information.member %></td>
+        <td><%= link_to 'Show', @information %></td>
+        <td><%= link_to 'Edit', edit_information_path(@information) %></td>
+        <td><%= link_to 'Destroy', @information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
-  </tbody>
+    </tbody>
 </table>
 
 <br>

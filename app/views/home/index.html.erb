@@ -1,0 +1,7 @@
+<h1>Home#index</h1>
+<%= link_to "Sair", destroy_member_session_path, method: :delete %>
+<%= link_to "Realizar uma Transação", new_transaction_path %>
+<%= link_to "Cadastrar um Recebedor", recipients_path %>
+<%= current_member.email %>
+<%= current_member.id %>
+<%= current_member.name %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 1
+  pay_method: MyString
+  member: one
+  boleto_url: MyText
+  boleto_barcode: MyText
+
+two:
+  amount: 1
+  pay_method: MyString
+  member: two
+  boleto_url: MyText
+  boleto_barcode: MyText

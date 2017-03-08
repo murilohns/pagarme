@@ -1,0 +1,52 @@
+<%= form_for(information) do |f| %>
+  <% if information.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(information.errors.count, "error") %> prohibited this information from being saved:</h2>
+
+      <ul>
+      <% information.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :street %>
+    <%= f.text_field :street, required:true, maxlength:60%>
+  </div>
+
+  <div class="field">
+    <%= f.label :neighborhood %>
+    <%= f.text_field :neighborhood, required:true, maxlength:40 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :zipcode %>
+    <%= f.text_field :zipcode, required:true, maxlength:8 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :street_number %>
+    <%= f.text_field :street_number, required:true, maxlength:5 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :complementary %>
+    <%= f.text_field :complementary, required:true, maxlength:40 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ddd %>
+    <%= f.text_field :ddd, required:true, maxlength:2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number, required:true, maxlength:9 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

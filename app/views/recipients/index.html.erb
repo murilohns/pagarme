@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recipients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Bank code</th>
+      <th>Agencia</th>
+      <th>Agencia dv</th>
+      <th>Conta</th>
+      <th>Conta dv</th>
+      <th>Legal name</th>
+      <th>Document number</th>
+      <th>Transfer enabled</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipients.each do |recipient| %>
+      <tr>
+        <td><%= recipient.code %></td>
+        <td><%= recipient.bank_code %></td>
+        <td><%= recipient.agencia %></td>
+        <td><%= recipient.agencia_dv %></td>
+        <td><%= recipient.conta %></td>
+        <td><%= recipient.conta_dv %></td>
+        <td><%= recipient.legal_name %></td>
+        <td><%= recipient.document_number %></td>
+        <td><%= recipient.transfer_enabled %></td>
+        <td><%= link_to 'Show', recipient %></td>
+        <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>
+        <td><%= link_to 'Destroy', recipient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recipient', new_recipient_path %>

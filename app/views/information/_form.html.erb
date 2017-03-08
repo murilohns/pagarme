@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+  
+  <div class="field">
+    <%= f.label :document_number %>
+    <%= f.text_field :document_number, required:true, maxlength:11%>
+  </div>
+  
   <div class="field">
     <%= f.label :street %>
     <%= f.text_field :street, required:true, maxlength:60%>

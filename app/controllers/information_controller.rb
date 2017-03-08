@@ -70,6 +70,6 @@ class InformationController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def information_params
-      params.require(:information).permit(:street, :neighborhood, :zipcode, :street_number, :complementary, :ddd, :phone_number)
+      params.require(:information).permit(:document_number, :street, :neighborhood, :zipcode, :street_number, :complementary, :ddd, :phone_number)
     end
 end

@@ -13,37 +13,37 @@
 
   <div class="field">
     <%= f.label :bank_code %>
-    <%= f.text_field :bank_code, maxlength:3, required %>
+    <%= f.text_field :bank_code, maxlength:3, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :agencia %>
-    <%= f.text_field :agencia, maxlength:4 %>
+    <%= f.text_field :agencia, maxlength:4, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :agencia_dv %>
-    <%= f.text_field :agencia_dv, maxlength:2 %>
+    <%= f.text_field :agencia_dv, maxlength:2, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :conta %>
-    <%= f.text_field :conta, maxlength:10 %>
+    <%= f.text_field :conta, maxlength:10, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :conta_dv %>
-    <%= f.text_field :conta_dv, maxlength:2 %>
+    <%= f.text_field :conta_dv, maxlength:2, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :legal_name %>
-    <%= f.text_field :legal_name, maxlength:60 %>
+    <%= f.text_field :legal_name, maxlength:60, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :document_number %>
-    <%= f.text_field :document_number, maxlength:14 %>
+    <%= f.text_field :document_number, maxlength:14, required: true %>
   </div>
 
   <div class="field">

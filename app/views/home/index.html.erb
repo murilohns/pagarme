@@ -1,7 +1,33 @@
-<h1>Home#index</h1>
-<%= link_to "Sair", destroy_member_session_path, method: :delete %>
-<%= link_to "Realizar uma Transação", new_transaction_path %>
-<%= link_to "Cadastrar um Recebedor", recipients_path %>
-<%= current_member.email %>
-<%= current_member.id %>
-<%= current_member.name %>
+<h1 class="text-center">Olá, seja bem vindo <%= current_member.name %></h1>
+<div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Selecione uma das opções abaixo:</h3>
+    </div>
+      <div class="panel-body">
+          <div class="form-group">
+              <%= link_to new_transaction_path do%>
+                <button class="btn btn-lg btn-success btn-block">Realizar uma Transação</button>
+              <% end %>
+          </div>
+          
+          <div class="form-group">
+              <%= link_to new_recipient_path do%>
+                <button class="btn btn-lg btn-success btn-block">Cadastrar um Recebedor</button>
+              <% end %>
+          </div>
+
+          <div class="form-group">
+              <%= link_to new_information_path do%>
+                <button class="btn btn-lg btn-info btn-block">Adicionar Informações</button>
+              <% end %>
+          </div>
+
+          <div class="form-group">
+            <%= link_to destroy_member_session_path, method: :delete do %>
+              <button class="btn btn-lg btn-danger btn-block">Sair</button>
+            <% end %>
+          </div>
+      </div>
+  </div>
+</div>

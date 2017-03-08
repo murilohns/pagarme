@@ -50,6 +50,15 @@
 <script type="text/javascript">
 $(document).ready(function() { // quando o jQuery estiver carregado...
     
+    $('#transaction_pay_method_credit_card').click(function() {
+        $('#campos').removeAttr('required');
+    });
+    $('#transaction_pay_method_boleto').click(function() {
+        $('#campos').attr({
+            'disabled': 'disabled'
+        });
+    });
+
     $("div.creditCard_form").hide();
     
     $("input[name$='transaction[pay_method]'").click(function() {

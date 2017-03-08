@@ -41,28 +41,26 @@ class TransactionsController < ApplicationController
       @transaction.boleto_barcode = transaction_type.boleto_barcode
 
     elsif @transaction.pay_method == "credit_card"
-      info = current_member.information
       transaction_type = PagarMe::Transaction.new(
         amount:    @transaction.amount,      # in cents
         card_hash: @transaction.card_hash,  # how to get a card hash: docs.pagar.me/capturing-card-data
         payment_method: @transaction.pay_method,
         :customer => {
-        :name => info.name,
-        :document_number => info.document_number,
-        :email => info.email,
+        :name => @transaction.member.name,
+        :document_number => @transaction.member.document_number,
+        :email => @transaction.member.email,
         :address => {
-            :street => info.street,
-            :neighborhood => info.neighborhood,
-            :zipcode => info.zipcode,
-            :street_number => info.street_number,
-            :complementary => info.complementary
+            :street => @transaction.member.information.street,
+            :neighborhood => @transaction.member.information.neighborhood,
+            :zipcode => @transaction.member.information.zipcode,
+            :street_number => @transaction.member.information.street_number,
+            :complementary => @transaction.member.information.complementary,
         },
         :phone => {
-            :ddd => info.ddd,
-            :number => info.phone_number
+            :ddd => @transaction.member.information.ddd,
+            :number => @transaction.member.information.phone_number
         }
-      }
-      )
+        })
       
     end
 

@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Card number:</strong>
+  <%= @transaction.card_number %>
+</p>
+
+<p>
+  <strong>Card holder name:</strong>
+  <%= @transaction.card_holder_name %>
+</p>
+
+<p>
+  <strong>Card expiration month:</strong>
+  <%= @transaction.card_expiration_month %>
+</p>
+
+<p>
+  <strong>Card expiration year:</strong>
+  <%= @transaction.card_expiration_year %>
+</p>
+
+<p>
+  <strong>Card cvv:</strong>
+  <%= @transaction.card_cvv %>
+</p>
+
+<p>
+  <strong>Card hash:</strong>
+  <%= @transaction.card_hash %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

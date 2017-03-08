@@ -1,0 +1,88 @@
+<%= form_for(transaction) do |f| %>
+  <% if transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :card_number %>
+    <%= f.text_field :card_number, maxlength:16 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :card_holder_name %>
+    <%= f.text_field :card_holder_name, maxlength:60 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :card_expiration_month %>
+    <%= f.text_field :card_expiration_month, maxlength:2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :card_expiration_year %>
+    <%= f.text_field :card_expiration_year, maxlength:2 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :card_cvv %>
+    <%= f.text_field :card_cvv, maxlength:3 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :card_hash %>
+    <%= f.text_field :card_hash %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function() { // quando o jQuery estiver carregado...
+    PagarMe.encryption_key = "ek_test_isRGBmcfKUcxymEKQhrqEQfeHNFv9n";
+
+    var form = $("#new_transaction"); 
+
+    form.submit(function(event) { // quando o form for enviado...
+        // inicializa um objeto de cartão de crédito e completa
+        // com os dados do form
+        var creditCard = new PagarMe.creditCard();
+        creditCard.cardHolderName = $("#new_transaction #transaction_card_holder_name").val();
+        creditCard.cardExpirationMonth = $("#new_transaction #transaction_card_expiration_month").val();
+        creditCard.cardExpirationYear = $("#new_transaction #transaction_card_expiration_year").val();
+        creditCard.cardNumber = $("#new_transaction #transaction_card_number").val();
+        creditCard.cardCVV = $("#new_transaction #transaction_card_cvv").val();
+
+        // pega os erros de validação nos campos do form
+        var fieldErrors = creditCard.fieldErrors();
+
+        //Verifica se há erros
+        var hasErrors = false;
+        for(var field in fieldErrors) { hasErrors = true; break; }
+
+        if(hasErrors) {
+            // realiza o tratamento de errors
+            alert(fieldErrors);
+        } else {
+            // se não há erros, gera o card_hash...
+            creditCard.generateHash(function(cardHash) {
+                // ...coloca-o no form...
+                form.append($('<input type="hidden" name="transaction[card_hash]"> id="transaction_card_hash"').val(cardHash));
+                // e envia o form
+                form.get(0).submit();
+            });
+        }
+
+        return false;
+    });
+});
+</script>

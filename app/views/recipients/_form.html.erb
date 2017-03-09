@@ -1,57 +1,69 @@
-<%= form_for(recipient) do |f| %>
-  <% if recipient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(recipient.errors.count, "error") %> prohibited this recipient from being saved:</h2>
-
-      <ul>
-      <% recipient.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Recebedores</h3>
     </div>
-  <% end %>
+    <div class="panel-body">
+      <%= form_for(recipient) do |f| %>
+      <% if recipient.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(recipient.errors.count, "error") %> prohibited this recipient from being saved:</h2>
 
-  <div class="field">
-    <%= f.label :bank_code %>
-    <%= f.text_field :bank_code, maxlength:3, required: true %>
-  </div>
+        <ul>
+        <% recipient.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :agencia %>
-    <%= f.text_field :agencia, maxlength:4, required: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :bank_code %>
+        <%= f.text_field :bank_code, maxlength:3, required: true, class:"form-control", placeholder:"Código do Banco" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :agencia_dv %>
-    <%= f.text_field :agencia_dv, maxlength:2, required: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :agencia %>
+        <%= f.text_field :agencia, maxlength:4, required: true, class:"form-control", placeholder:"Número da Agência" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :conta %>
-    <%= f.text_field :conta, maxlength:10, required: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :agencia_dv %>
+        <%= f.text_field :agencia_dv, maxlength:2, required: true, class:"form-control", placeholder:"Digito Verificador da Agência" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :conta_dv %>
-    <%= f.text_field :conta_dv, maxlength:2, required: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :conta %>
+        <%= f.text_field :conta, maxlength:10, required: true, class:"form-control", placeholder:"Número da Conta" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :legal_name %>
-    <%= f.text_field :legal_name, maxlength:60, required: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :conta_dv %>
+        <%= f.text_field :conta_dv, maxlength:2, required: true, class:"form-control", placeholder:"Digito Verificador da Conta" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :document_number %>
-    <%= f.text_field :document_number, maxlength:14, required: true %>
-  </div>
+      <div class="form-group">
+        <%= f.label :legal_name %>
+        <%= f.text_field :legal_name, maxlength:60, required: true, class:"form-control", placeholder:"Nome (Como Escrito no Cartão)" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :transfer_enabled %>
-    <%= f.check_box :transfer_enabled %>
-  </div>
+      <div class="form-group">
+        <%= f.label :document_number %>
+        <%= f.text_field :document_number, maxlength:14, required: true, class:"form-control", placeholder:"RG ou CPF" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit %>
+      <div class="form-group">
+        <%= f.label :transfer_enabled %>
+        <%= f.check_box :transfer_enabled %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit class: "btn btn-lg btn-success btn-block" %> 
+        <%= link_to home_index_path do %>
+          <button class="btn btn-lg btn-danger btn-block">Cancelar</button>
+        <% end %>
+      </div>
+    <% end %>
+    </div>
   </div>
-<% end %>
+</div>

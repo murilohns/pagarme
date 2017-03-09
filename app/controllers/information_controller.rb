@@ -4,7 +4,7 @@ class InformationController < ApplicationController
   # GET /information
   # GET /information.json
   def index
-    @information = current_member.information
+    @information = current_member.information 
   end
 
   # GET /information/1
@@ -14,7 +14,11 @@ class InformationController < ApplicationController
 
   # GET /information/new
   def new
-    @information = Information.new
+    if defined?(current_member.information) && current_member.information != nil
+      redirect_to new_transaction_path
+    else
+      @information = Information.new
+    end
   end
 
   # GET /information/1/edit
@@ -29,7 +33,7 @@ class InformationController < ApplicationController
 
     respond_to do |format|
       if @information.save
-        format.html { redirect_to new_information_path, notice: 'Information was successfully created.' }
+        format.html { redirect_to new_transaction_path, notice: 'Information was successfully created.' }
         format.json { render :show, status: :created, location: @information }
       else
         format.html { render :new }
@@ -57,7 +61,7 @@ class InformationController < ApplicationController
   def destroy
     @information.destroy
     respond_to do |format|
-      format.html { redirect_to information_index_url, notice: 'Information was successfully destroyed.' }
+      format.html { redirect_to information_path, notice: 'Information was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

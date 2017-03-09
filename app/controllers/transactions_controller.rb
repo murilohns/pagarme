@@ -14,7 +14,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    if defined?(current_member.information.street) && current_member.information.street != '' 
+    if defined?(current_member.information) && current_member.information != nil
       @transaction = Transaction.new
     else
       redirect_to new_information_path

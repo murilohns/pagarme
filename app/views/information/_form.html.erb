@@ -1,58 +1,70 @@
-<%= form_for(information) do |f| %>
-  <% if information.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(information.errors.count, "error") %> prohibited this information from being saved:</h2>
-
-      <ul>
-      <% information.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Informações</h3>
     </div>
-  <% end %>
+    <div class="panel-body">
+      <%= form_for(information) do |f| %>
+      <% if information.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(information.errors.count, "error") %> prohibited this information from being saved:</h2>
 
-  
-  <div class="field">
-    <%= f.label :document_number %>
-    <%= f.text_field :document_number, required:true, maxlength:11%>
-  </div>
-  
-  <div class="field">
-    <%= f.label :street %>
-    <%= f.text_field :street, required:true, maxlength:60%>
-  </div>
+          <ul>
+          <% information.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div class="field">
-    <%= f.label :neighborhood %>
-    <%= f.text_field :neighborhood, required:true, maxlength:40 %>
-  </div>
+      
+      <div class="form-group">
+        <%= f.label :document_number %>
+        <%= f.text_field :document_number, required:true, maxlength:11, class:"form-control", placeholder:"CPF" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :street %>
+        <%= f.text_field :street, required:true, maxlength:60, class:"form-control", placeholder:"Endereço" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :zipcode %>
-    <%= f.text_field :zipcode, required:true, maxlength:8 %>
-  </div>
+      <div class="form-group">
+        <%= f.label :neighborhood %>
+        <%= f.text_field :neighborhood, required:true, maxlength:40, class:"form-control", placeholder:"Bairro" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :street_number %>
-    <%= f.text_field :street_number, required:true, maxlength:5 %>
-  </div>
+      <div class="form-group">
+        <%= f.label :zipcode %>
+        <%= f.text_field :zipcode, required:true, maxlength:8, class:"form-control", placeholder:"CEP" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :complementary %>
-    <%= f.text_field :complementary, maxlength:40 %>
-  </div>
+      <div class="form-group">
+        <%= f.label :street_number %>
+        <%= f.text_field :street_number, required:true, maxlength:5, class:"form-control", placeholder:"Número da Rua" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :ddd %>
-    <%= f.text_field :ddd, required:true, maxlength:2 %>
-  </div>
+      <div class="form-group">
+        <%= f.label :complementary %>
+        <%= f.text_field :complementary, maxlength:40, class:"form-control", placeholder:"Complemento" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :phone_number %>
-    <%= f.text_field :phone_number, required:true, maxlength:9 %>
-  </div>
+      <div class="form-group">
+        <%= f.label :ddd %>
+        <%= f.text_field :ddd, required:true, maxlength:2, class:"form-control", placeholder:"DDD", size:2%>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, required:true, maxlength:9, class:"form-control", placeholder:"Telefone" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit %>
+      <div class="actions">
+        <%= f.submit class: "btn btn-lg btn-success btn-block" %>
+        <%= link_to home_index_path do %>
+          <button class="btn btn-lg btn-danger btn-block">Cancelar</button>
+        <% end %>
+        </div>
+    <% end %>
+    </div>
   </div>
-<% end %>
+</div>

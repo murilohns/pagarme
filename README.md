@@ -1,24 +1,10 @@
-# README
+# [Pagar.me] Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* To use the application, you need to define your `api_key` in `app/controllers/application_controller.rb`
 
-Things you may want to cover:
+* run `bundle install`
 
-* Ruby version
+*This application was made using Rails 5.
 
-* System dependencies
+*If u need, change the database encoding to `latin1` or `utf8`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

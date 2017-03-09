@@ -6,5 +6,5 @@
 
 * This application was made using Rails 5.
 
-* If u need, change the database encoding to `latin1` or `utf8`
+* If u need, change the database encoding in `config/database.yml` to `latin1` or `utf8`
 

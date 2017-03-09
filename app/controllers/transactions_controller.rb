@@ -47,7 +47,7 @@ class TransactionsController < ApplicationController
         payment_method: @transaction.pay_method,
         :customer => {
         :name => @transaction.member.name,
-        :document_number => @transaction.member.document_number,
+        :document_number => @transaction.member.information.document_number,
         :email => @transaction.member.email,
         :address => {
             :street => @transaction.member.information.street,

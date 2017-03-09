@@ -1,50 +1,66 @@
-<%= form_for(transaction) do |f| %>
-  <% if transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+<div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Transação</h3>
+        </div>
+    <div class="panel-body">
+        <%= form_for(transaction) do |f| %>
+          <% if transaction.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
 
-      <ul>
-      <% transaction.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+              <ul>
+              <% transaction.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
 
-  <div class="field">
-    <%= f.label :amount %>
-    <%= f.number_field :amount, required: true %>
-  </div>
+          <div class="form-group">
+            <%= f.label :amount %>
+            <%= f.number_field :amount, required: true, class:"form-control", placeholder:"Quantidade (Em Centavos)" %>
+          </div>
 
-  <div class="field">
-    <label for="boleto">Boleto</label>
-    <%= f.radio_button(:pay_method, "boleto") %>
-    <label for="credit_card">Cartão de Crédito</label>
-    <%= f.radio_button(:pay_method, "credit_card") %>
-  </div>
-  
-  <div id="creditCard_form" class="creditCard_form">
-    Número do cartão: <input type="text" id="card_number" maxlength="19"/>
-    <br/>
-    Nome (como escrito no cartão): <input type="text" id="card_holder_name"  maxlength="60" />
-    <br/>
-    Mês de expiração: <input type="text" id="card_expiration_month"  maxlength="2"/>
-    <br/>
-    Ano de expiração: <input type="text" id="card_expiration_year" maxlength="2"/>
-    <br/>
-    Código de segurança: <input type="text" id="card_cvv" maxlength="3"/>
-    <br/>
-        
-    <div id="field_errors">
-    </div>
-    <br/>
-    </div>
+          <div class="form-group">
+            <label for="boleto">Boleto</label>
+            <%= f.radio_button(:pay_method, "boleto") %>
+            <label for="credit_card">Cartão de Crédito</label>
+            <%= f.radio_button(:pay_method, "credit_card") %>
+          </div>
+          
+          <div id="creditCard_form" class="creditCard_form form-group">
+            Número do cartão: 
+            <input type="text" id="card_number" maxlength="19" class="form-control" placeholder="Número do Cartão"/>
+            <br/>
+            Nome (como escrito no cartão): 
+            <input type="text" id="card_holder_name"  maxlength="60" class="form-control" placeholder="Nome(Igual no cartão)"/>
+            <br/>
+            Mês de expiração: 
+            <input type="text" id="card_expiration_month"  maxlength="2" class="form-control" placeholder="Mês de expiração"/>
+            <br/>
+            Ano de expiração: 
+            <input type="text" id="card_expiration_year" maxlength="2" class="form-control" placeholder="Ano de expiração"/>
+            <br/>
+            Código de segurança: 
+            <input type="text" id="card_cvv" maxlength="3" class="form-control" placeholder="Código de Segurança"/>
+            <br/>
+                
+            <div id="field_errors">
+            </div>
+            <br/>
+        </div>
 
-    <div class="actions">
-      <%= f.submit %>
+            <div class="actions">
+              <%= f.submit class:"btn btn-lg btn-success btn-block"%>
+                <%= link_to home_index_path do %>
+                    <button class="btn btn-lg btn-danger btn-block">Cancelar</button>
+                <% end %>
+            </div>
+        <% end %>
     </div>
-  </div>
-<% end %>
+    </div>
+</div>
 
 <script type="text/javascript">
 $(document).ready(function() { // quando o jQuery estiver carregado...
@@ -66,8 +82,7 @@ $(document).ready(function() { // quando o jQuery estiver carregado...
     form.submit(function(event) { // quando o form for enviado...
         // inicializa um objeto de cartão de crédito e completa
         // com os dados do form
-        if ($('input[name=transaction[pay_method]]:checked').val() == "credit_card") {
-        
+        if($("input[name='transaction[pay_method]']:checked").val() == "credit_card"){ //se o método de pagamento for cartão de crédito
             var creditCard = new PagarMe.creditCard();
             creditCard.cardHolderName = $("#new_transaction #card_holder_name").val();
             creditCard.cardExpirationMonth = $("#new_transaction #card_expiration_month").val();

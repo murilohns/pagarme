@@ -1,4 +1,4 @@
-# [Pagar.me] Challenge
+# [Pagar.me](http://pagar.me) Challenge
 
 * To use the application, you need to define your `api_key` in `app/controllers/application_controller.rb`
 

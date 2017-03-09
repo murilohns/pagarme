@@ -58,11 +58,9 @@ class TransactionsController < ApplicationController
             :number => @transaction.member.information.phone_number
         }
         })
-      
     end
 
     transaction.charge
-
 
     @transaction.boleto_url = transaction.boleto_url
     @transaction.boleto_barcode = transaction.boleto_barcode

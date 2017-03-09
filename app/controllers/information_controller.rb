@@ -4,7 +4,12 @@ class InformationController < ApplicationController
   # GET /information
   # GET /information.json
   def index
-    @information = current_member.information 
+    if defined?(current_member.information) && current_member.information !=''
+      redirect_to edit_information_path(current_member.information)
+    else
+      redirect_to new_information_path
+    end
+
   end
 
   # GET /information/1
@@ -15,7 +20,7 @@ class InformationController < ApplicationController
   # GET /information/new
   def new
     if defined?(current_member.information) && current_member.information != nil
-      redirect_to new_transaction_path
+      redirect_to edit_information_path(current_member.information)
     else
       @information = Information.new
     end
@@ -47,7 +52,7 @@ class InformationController < ApplicationController
   def update
     respond_to do |format|
       if @information.update(information_params)
-        format.html { redirect_to @information, notice: 'Information was successfully updated.' }
+        format.html { redirect_to new_transaction_path, notice: 'Information was successfully updated.' }
         format.json { render :show, status: :ok, location: @information }
       else
         format.html { render :edit }

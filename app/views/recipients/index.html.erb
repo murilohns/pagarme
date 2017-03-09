@@ -2,7 +2,7 @@
 
 <h1>Recipients</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Code</th>
@@ -40,4 +40,15 @@
 
 <br>
 
-<%= link_to 'New Recipient', new_recipient_path %>
+<%= link_to new_recipient_path do %>
+  <button class="btn btn-lg btn-success btn-block">Novo Recebedor</button>
+<% end %>
+<br/>
+<%= link_to new_transaction_path do %>
+  <button class="btn btn-lg btn-success btn-block">Nova Transação</button>
+<% end %>
+<br/>
+<%= link_to home_index_path do %>
+  <button class="btn btn-lg btn-danger btn-block">Menu Principal</button>
+<% end %>
+

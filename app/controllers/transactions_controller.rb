@@ -32,16 +32,13 @@ class TransactionsController < ApplicationController
     @transaction.member = current_member
 
     if @transaction.pay_method == "boleto"
-      transaction_type = PagarMe::Transaction.new(
+      transaction = PagarMe::Transaction.new(
         amount:         @transaction.amount,    # in cents
         payment_method: @transaction.pay_method
       )
 
-      @transaction.boleto_url = transaction_type.boleto_url
-      @transaction.boleto_barcode = transaction_type.boleto_barcode
-
     elsif @transaction.pay_method == "credit_card"
-      transaction_type = PagarMe::Transaction.new(
+      transaction = PagarMe::Transaction.new(
         amount:    @transaction.amount,      # in cents
         card_hash: @transaction.card_hash,  # how to get a card hash: docs.pagar.me/capturing-card-data
         payment_method: @transaction.pay_method,
@@ -64,9 +61,13 @@ class TransactionsController < ApplicationController
       
     end
 
-    transaction_type.charge
+    transaction.charge
 
-    @transaction.status = transaction_type.status
+
+    @transaction.boleto_url = transaction.boleto_url
+    @transaction.boleto_barcode = transaction.boleto_barcode
+
+    @transaction.status = transaction.status
 
     respond_to do |format|
       if @transaction.save

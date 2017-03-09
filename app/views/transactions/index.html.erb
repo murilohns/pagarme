@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Transactions</h1>
+<h1>Transacões</h1>
 
 <table class="table table-striped">
   <thead>
@@ -20,7 +20,7 @@
       <tr>
         <td><%= transaction.amount %></td>
         <td><%= transaction.pay_method %></td>
-        <td><%= transaction.member %></td>
+        <td><%= transaction.member.name %></td>
         <td><%= transaction.boleto_url %></td>
         <td><%= transaction.boleto_barcode %></td>
         <td><%= transaction.status %></td>

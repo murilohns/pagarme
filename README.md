@@ -4,7 +4,7 @@
 
 * run `bundle install`
 
-*This application was made using Rails 5.
+* This application was made using Rails 5.
 
-*If u need, change the database encoding to `latin1` or `utf8`
+* If u need, change the database encoding to `latin1` or `utf8`
 

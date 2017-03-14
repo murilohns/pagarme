@@ -30,9 +30,11 @@
         <td><%= server.boleto_url %></td>
         <td><%= server.boleto_barcode %></td>
         <td><%= server.boleto_expiration_date %></td>
-        <%= transaction.recipients.each do |recipient| %>
-        <td>recipient.legal_name</td>
-        <% end %>
+        <td>
+          <% transaction.recipients.each do |recipient| %>
+            <%= recipient.code %>
+          <% end %>
+        </td>
         <td><%= server.status %></td>
         <td><%= link_to 'Show', transaction %></td>
         <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>

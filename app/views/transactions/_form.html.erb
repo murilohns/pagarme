@@ -30,19 +30,18 @@
           </div>
           
           <div class="form-group">
+            <%= link_to_add_association 'Add Recipient', f, :split_rules, 
+            'data-association-insert-node' => "#split_rules_recipient ol",
+            'data-association-insert-method' => "append", 
+            :wrap_object => Proc.new{|split_rule| split_rule.build_recipient; split_rule} %>
 
-            <fieldset id="transaction_recipients-recipient">
+            <fieldset id="split_rules_recipient">
                 <ol>
-                    <%= f.fields_for :transaction_recipients do |transaction_recipients| %>
-                      <%= render partial: "transaction_recipient_fields", locals: {f: transaction_recipients} %>
+                    <%= f.fields_for :split_rules do |split_rule| %>
+                      <%= render partial: "split_rule_fields", locals: {f: split_rule} %>
                     <% end %>
                 </ol>
             </fieldset>
-
-            <%= link_to_add_association 'Add Recipient', f, :transaction_recipients, 
-            'data-association-insert-node' => "#transaction_recipients-recipient ol",
-            'data-association-insert-method' => "append", 
-            :wrap_object => Proc.new{|transaction_recipients| transaction_recipients.build_recipient; transaction_recipients} %>
           </div>
           
           <div id="creditCard_form" class="creditCard_form form-group">

@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :recipients_for_select, only: [:new, :edit, :update, :create]
 
   # GET /transactions
   # GET /transactions.json
@@ -105,6 +106,10 @@ class TransactionsController < ApplicationController
   end
 
   private
+
+    def recipients_for_select
+      @recipients_for_select = Recipient.all 
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
       @transaction = Transaction.find(params[:id])
@@ -113,7 +118,7 @@ class TransactionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
       params.require(:transaction).permit(:amount, :pay_method, :card_hash,
-        :transaction_recipients_attributes => [:id, :percentage, :transaction_id, :recipient_id,
+        :split_rules_attributes => [:id, :percentage, :transaction_id, :recipient_id,
         :_destroy, :recipient_attributes => [:id, :legal_name]])
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314000422) do
+ActiveRecord::Schema.define(version: 20170314031643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,14 +62,14 @@ ActiveRecord::Schema.define(version: 20170314000422) do
     t.datetime "updated_at",                  null: false
   end
 
-  create_table "transaction_recipients", force: :cascade do |t|
+  create_table "split_rules", force: :cascade do |t|
+    t.string   "percentage"
     t.integer  "transaction_id"
     t.integer  "recipient_id"
-    t.integer  "percentage"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.index ["recipient_id"], name: "index_transaction_recipients_on_recipient_id", using: :btree
-    t.index ["transaction_id"], name: "index_transaction_recipients_on_transaction_id", using: :btree
+    t.index ["recipient_id"], name: "index_split_rules_on_recipient_id", using: :btree
+    t.index ["transaction_id"], name: "index_split_rules_on_transaction_id", using: :btree
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20170314000422) do
   end
 
   add_foreign_key "information", "members"
-  add_foreign_key "transaction_recipients", "recipients"
-  add_foreign_key "transaction_recipients", "transactions"
+  add_foreign_key "split_rules", "recipients"
+  add_foreign_key "split_rules", "transactions"
   add_foreign_key "transactions", "members"
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :split_rules
   resources :information
   resources :transactions
   get 'transaction/new'

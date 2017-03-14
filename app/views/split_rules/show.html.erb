@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Percentage:</strong>
+  <%= @split_rule.percentage %>
+</p>
+
+<p>
+  <strong>Transaction:</strong>
+  <%= @split_rule.transaction %>
+</p>
+
+<p>
+  <strong>Recipient:</strong>
+  <%= @split_rule.recipient %>
+</p>
+
+<%= link_to 'Edit', edit_split_rule_path(@split_rule) %> |
+<%= link_to 'Back', split_rules_path %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Split Rules</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Percentage</th>
+      <th>Transaction</th>
+      <th>Recipient</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @split_rules.each do |split_rule| %>
+      <tr>
+        <td><%= split_rule.percentage %></td>
+        <td><%= split_rule.transaction %></td>
+        <td><%= split_rule.recipient %></td>
+        <td><%= link_to 'Show', split_rule %></td>
+        <td><%= link_to 'Edit', edit_split_rule_path(split_rule) %></td>
+        <td><%= link_to 'Destroy', split_rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Split Rule', new_split_rule_path %>

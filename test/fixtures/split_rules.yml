@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  percentage: MyString
+  transaction: one
+  recipient: one
+
+two:
+  percentage: MyString
+  transaction: two
+  recipient: two

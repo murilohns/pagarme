@@ -67,6 +67,8 @@ class TransactionsController < ApplicationController
 
     @transaction.status = transaction.status
 
+    @transaction.id = transaction.id
+
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
@@ -110,6 +112,8 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:amount, :pay_method, :card_hash)
+      params.require(:transaction).permit(:amount, :pay_method, :card_hash,
+        :transaction_recipients_attributes => [:id, :percentage, :transaction_id, :recipient_id,
+        :_destroy, :recipient_attributes => [:id, :legal_name]])
     end
 end

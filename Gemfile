@@ -28,6 +28,8 @@ gem 'devise-i18n'
 gem 'pagarme'
 #Bootstrap Gem
 gem 'rails-assets-bootstrap', source: 'https://rails-assets.org'
+#Cocoon Gem
+gem 'cocoon'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -55,6 +57,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Generate Entity-Relationship Diagrams for Rails applications 
+  gem 'rails-erd'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,0 +1,32 @@
+<%= form_for(split_rule) do |f| %>
+  <% if split_rule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(split_rule.errors.count, "error") %> prohibited this split_rule from being saved:</h2>
+
+      <ul>
+      <% split_rule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :percentage %>
+    <%= f.text_field :percentage %>
+  </div>
+
+  <div class="field">
+    <%= f.label :transaction_id %>
+    <%= f.text_field :transaction_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :recipient_id %>
+    <%= f.text_field :recipient_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -58,6 +58,11 @@ class TransactionsController < ApplicationController
         :name => @transaction.member.name,
         :document_number => @transaction.member.information.document_number,
         :email => @transaction.member.email,
+        split_rule: [
+          @transaction.recipients.each do |recipient|
+            { recipient_id: recipient.id, percentage: @transaction.split_rules.where(recipient_id: recipient.id).pluck(:percentage) }
+          end
+        ],
         :address => {
             :street => @transaction.member.information.street,
             :neighborhood => @transaction.member.information.neighborhood,

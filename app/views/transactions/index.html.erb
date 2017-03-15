@@ -21,6 +21,7 @@
                       <p><strong>Data de expiração do boleto:</strong> <%= server.boleto_expiration_date  %></p>
                     <% end %>
                     <p>
+                    <% if transaction.division == true %>
                       <table class="text-center">
                       <tr>
                         <td colspan="3"><strong>Recebedores:</strong></td>
@@ -30,19 +31,19 @@
                         <td><strong>Porcentagem</strong></td>
                         <td><strong>Quantidade</strong></td>
                       </tr>
-                        
                           <% transaction.recipients.each do |recipient| %>
                             <tr>
                               <td> <%= recipient.legal_name %> </td>
-                              <% percentage = transaction.split_rules.find(recipient.id).percentage 
-                                percent = (percentage.to_f / 100)
-                                total = server.amount * percent
+                              <% percentage = transaction.split_rules.where(recipient_id: recipient.id).collect(&:percentage)
+
+                                #total = server.amount * percent
                               %>
                               <td> <%= percentage %>% </td>
-                              <td> R$ <%= total.round(2) %> </td> <br />
+                              <td> R$ <%#= total.round(2) %> </td> <br />
                             <tr>
                           <% end %>
                       </table>
+                    <% end %>
                     </p>
                     <p>Status da transação:  <%= server.status %></p>
                     <% if transaction.member = current_member %>

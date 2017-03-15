@@ -12,7 +12,7 @@
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading">Identificação da Transação <%= transaction.id %></h2>
-                    <p><strong>Valor da Transação: R$</strong>  <%= (server.amount / 100).round(2) %></p>
+                    <p><strong>Valor da Transação: R$</strong>  <%= (server.amount / 100).to_f.round(2) %></p>
                     <p><strong>Meio de pagamento:</strong>  <%= server.payment_method %></p>
                     <p><strong>Membro que realizou:</strong>  <%= transaction.member.name %></p>
                     <% if server.payment_method == "boleto" %>
@@ -46,7 +46,7 @@
                     </p>
                     <p>Status da transação:  <%= server.status %></p>
                     <% if transaction.member = current_member %>
-                      <%= link_to 'Apagar', transaction, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-danger", type:"button" %>
+                      <%= link_to 'Apagar', transaction, method: :_destroy, data: { confirm: 'Você tem certeza?' }, class:"btn btn-danger", type:"button" %>
                     <% end %>
                 </div>
             </div>

@@ -33,6 +33,8 @@ namespace :test do
     ])
 
     split.charge
+
+    puts split.status
   end
 
 end

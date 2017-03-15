@@ -5,11 +5,7 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    if Transaction.find(current_member)
-      @transactions = Transaction.find(current_member)
-    else
-      redirect_to new_transaction_path
-    end
+    @transactions = Transaction.all
   end
 
   # GET /transactions/1
@@ -36,15 +32,21 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     @transaction.member = current_member
 
+
+    #dividir = []
+
+    #@transaction.recipients.each_with_index do |recip, index|
+    #  dividir[index] = {recipient_id: recip.code, percentage: @transaction.split_rules.where(recipient_id: recip.id).pluck(:percentage)}
+    #end
     if @transaction.pay_method == "boleto" && @transaction.division == true
       transaction = PagarMe::Transaction.new(
           amount:         @transaction.amount,    # in cents
           payment_method: @transaction.pay_method,
-          split_rules: [
-            @transaction.recipients.each do |recipient|
-               { recipient_id: recipient.code, percentage: @transaction.split_rules.find(recipient.id).percentage }
-            end
-          ]
+          split_rule: [
+          @transaction.recipients.each do |recipient|
+            { recipient_id: recipient.id, percentage: @transaction.split_rules.where(recipient_id: recipient.id).pluck(:percentage) }
+          end
+          ]          
       )
     ############################################################################
     elsif @transaction.pay_method == "credit_card" && @transaction.division == true
@@ -67,12 +69,7 @@ class TransactionsController < ApplicationController
             :ddd => @transaction.member.information.ddd,
             :number => @transaction.member.information.phone_number
         }
-        },
-        split_rules: [
-          @transaction.recipients.each do |recipient|
-            { recipient_id: recipient.code, percentage: @transaction.split_rules.find(recipient.id).percentage }
-          end
-        ])
+        })
     #############################################################################
     elsif @transaction.pay_method == "boleto" # realiza a transação via boleto
       transaction = PagarMe::Transaction.new(

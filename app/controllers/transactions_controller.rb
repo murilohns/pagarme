@@ -5,7 +5,11 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+    if Transaction.find(current_member)
+      @transactions = Transaction.find(current_member)
+    else
+      redirect_to new_transaction_path
+    end
   end
 
   # GET /transactions/1
@@ -32,13 +36,51 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     @transaction.member = current_member
 
-    if @transaction.pay_method == "boleto"
+    if @transaction.pay_method == "boleto" && @transaction.division == true
+      transaction = PagarMe::Transaction.new(
+          amount:         @transaction.amount,    # in cents
+          payment_method: @transaction.pay_method,
+          split_rules: [
+            @transaction.recipients.each do |recipient|
+               { recipient_id: recipient.code, percentage: @transaction.split_rules.find(recipient.id).percentage }
+            end
+          ]
+      )
+    ############################################################################
+    elsif @transaction.pay_method == "credit_card" && @transaction.division == true
+      transaction = PagarMe::Transaction.new(
+        amount:    @transaction.amount,      # in cents
+        card_hash: @transaction.card_hash,  # how to get a card hash: docs.pagar.me/capturing-card-data
+        payment_method: @transaction.pay_method,
+        :customer => {
+        :name => @transaction.member.name,
+        :document_number => @transaction.member.information.document_number,
+        :email => @transaction.member.email,
+        :address => {
+            :street => @transaction.member.information.street,
+            :neighborhood => @transaction.member.information.neighborhood,
+            :zipcode => @transaction.member.information.zipcode,
+            :street_number => @transaction.member.information.street_number,
+            :complementary => @transaction.member.information.complementary,
+        },
+        :phone => {
+            :ddd => @transaction.member.information.ddd,
+            :number => @transaction.member.information.phone_number
+        }
+        },
+        split_rules: [
+          @transaction.recipients.each do |recipient|
+            { recipient_id: recipient.code, percentage: @transaction.split_rules.find(recipient.id).percentage }
+          end
+        ])
+    #############################################################################
+    elsif @transaction.pay_method == "boleto" # realiza a transação via boleto
       transaction = PagarMe::Transaction.new(
         amount:         @transaction.amount,    # in cents
         payment_method: @transaction.pay_method
-      )
-
-    elsif @transaction.pay_method == "credit_card"
+    )
+    #############################################################################
+    elsif @transaction.pay_method == "credit_card" # realiza a transação via cartão
       transaction = PagarMe::Transaction.new(
         amount:    @transaction.amount,      # in cents
         card_hash: @transaction.card_hash,  # how to get a card hash: docs.pagar.me/capturing-card-data
@@ -117,7 +159,7 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:amount, :pay_method, :card_hash,
+      params.require(:transaction).permit(:amount, :pay_method, :card_hash, :division,
         :split_rules_attributes => [:id, :percentage, :transaction_id, :recipient_id,
         :_destroy, :recipient_attributes => [:id, :legal_name]])
     end

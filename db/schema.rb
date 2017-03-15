@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20170314031643) do
     t.text     "boleto_url"
     t.text     "boleto_barcode"
     t.text     "card_hash"
+    t.boolean  "division"
     t.string   "status"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false

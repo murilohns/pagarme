@@ -7,6 +7,7 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.text :boleto_url
       t.text :boleto_barcode
       t.text :card_hash
+      t.boolean :division
       t.string :status
 
       t.timestamps

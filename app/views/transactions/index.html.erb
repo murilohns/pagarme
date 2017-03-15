@@ -2,48 +2,65 @@
 
 <h1>Transacões</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Amount</th>
-      <th>Pay method</th>
-      <th>Member</th>
-      <th>Boleto url</th>
-      <th>Boleto barcode</th>
-      <th>Boleto Expiration Date</th>
-      <th>Recebedores</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @transactions.each do |transaction| %>
     <% server = PagarMe::Transaction.find_by_id(transaction.id)%>
-
-      <tr>
-        <td><%= transaction.id %></td>
-        <td><%= server.amount %></td>
-        <td><%= server.payment_method %></td> %></td>
-        <td><%= transaction.member.name %></td>
-        <td><%= server.boleto_url %></td>
-        <td><%= server.boleto_barcode %></td>
-        <td><%= server.boleto_expiration_date %></td>
-        <td>
-          <% transaction.recipients.each do |recipient| %>
-            <%= recipient.code %>
-          <% end %>
-        </td>
-        <td><%= server.status %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    
+    <div class="content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Identificação da Transação <%= transaction.id %></h2>
+                    <p><strong>Valor da Transação: R$</strong>  <%= (server.amount / 100).round(2) %></p>
+                    <p><strong>Meio de pagamento:</strong>  <%= server.payment_method %></p>
+                    <p><strong>Membro que realizou:</strong>  <%= transaction.member.name %></p>
+                    <% if server.payment_method == "boleto" %>
+                      <p><strong>Link para o boleto:</strong> <%= server.boleto_url  %></p>
+                      <p><strong>Código de barras do boleto:</strong> <%= server.boleto_barcode %></p>
+                      <p><strong>Data de expiração do boleto:</strong> <%= server.boleto_expiration_date  %></p>
+                    <% end %>
+                    <p>
+                      <table class="text-center">
+                      <tr>
+                        <td colspan="3"><strong>Recebedores:</strong></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Nome</strong></td>
+                        <td><strong>Porcentagem</strong></td>
+                        <td><strong>Quantidade</strong></td>
+                      </tr>
+                        
+                          <% transaction.recipients.each do |recipient| %>
+                            <tr>
+                              <td> <%= recipient.legal_name %> </td>
+                              <% percentage = transaction.split_rules.find(recipient.id).percentage 
+                                percent = (percentage.to_f / 100)
+                                total = server.amount * percent
+                              %>
+                              <td> <%= percentage %>% </td>
+                              <td> R$ <%= total.round(2) %> </td> <br />
+                            <tr>
+                          <% end %>
+                      </table>
+                    </p>
+                    <p>Status da transação:  <%= server.status %></p>
+                    <% if transaction.member = current_member %>
+                      <%= link_to 'Apagar', transaction, method: :delete, data: { confirm: 'Você tem certeza?' }, class:"btn btn-danger", type:"button" %>
+                    <% end %>
+                </div>
+            </div>
+      </div>
+      <!-- /.container -->
+  </div>
+  <% end %> 
 <br>
 
-<%= link_to 'New Transaction', new_transaction_path %>
+<div class="actions">
+  <%= link_to new_transaction_path do %>
+    <button class="btn btn-lg btn-success btn-block">Nova transação</button>
+  <% end %> 
+  <%= link_to home_index_path do %>
+    <button class="btn btn-lg btn-danger btn-block">Menu Principal</button>
+  <% end %>
+</div>

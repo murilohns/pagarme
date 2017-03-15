@@ -29,7 +29,12 @@
             <%= f.radio_button(:pay_method, "credit_card") %>
           </div>
           
-          <div class="form-group">
+          <div class="form_group">
+              <%= f.check_box :division %>
+              <%= f.label :division %>
+          </div>
+
+          <div class="form-group" id="division-group">
             <%= link_to_add_association 'Add Recipient', f, :split_rules, 
             'data-association-insert-node' => "#split_rules_recipient ol",
             'data-association-insert-method' => "append", 
@@ -81,14 +86,21 @@
 $(document).ready(function() { // quando o jQuery estiver carregado...
     
     $("#creditCard_form").hide();
-    
+    $("#division-group").hide();
+
     $("input[id$='transaction_pay_method_credit_card'").click(function() {
-            $("#creditCard_form").show();
+        $("#creditCard_form").show(); //exibe o campo de cartão de crédito
     });
 
     $("input[id$='transaction_pay_method_boleto'").click(function() {
-            $("#creditCard_form").hide();
+        $("#creditCard_form").hide(); //esconde o campo de cartão de crédito
     });
+
+    if($("input[name='transaction[division]']:checked")){
+        $("#division-group").show(); //mostra os recebedores
+    }else{
+        $("#division-group").hide(); //esconde os recebedores
+    }
     
     PagarMe.encryption_key = "ek_test_isRGBmcfKUcxymEKQhrqEQfeHNFv9n";
 

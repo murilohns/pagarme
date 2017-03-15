@@ -32,12 +32,6 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     @transaction.member = current_member
 
-
-    #dividir = []
-
-    #@transaction.recipients.each_with_index do |recip, index|
-    #  dividir[index] = {recipient_id: recip.code, percentage: @transaction.split_rules.where(recipient_id: recip.id).pluck(:percentage)}
-    #end
     if @transaction.pay_method == "boleto" && @transaction.division == true
       transaction = PagarMe::Transaction.new(
           amount:         @transaction.amount,    # in cents

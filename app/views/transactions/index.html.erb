@@ -37,10 +37,10 @@
                               <% percentage = transaction.split_rules.where(recipient_id: recipient.id).collect(&:percentage)
                                 percent = (percentage.first.to_f / 100)
 
-                                total = server.amount * percent
+                                total = (server.amount / 100) * percent
                               %>
                               <td> <%= percentage %>% </td>
-                              <td> R$ <%= total.round(2) %> </td> <br />
+                              <td> R$ <%= total.round(3) %> </td> <br />
                             <tr>
                           <% end %>
                       </table>

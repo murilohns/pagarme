@@ -6,5 +6,6 @@
 
 * This application was made using Rails 5.
 
-* If u need, change the database encoding in `config/database.yml` to `latin1` or `utf8`
+* If you need, change the database encoding in `config/database.yml` to `latin1` or `utf8`
 
+* You can access the application by clicking on the follow link: [Challenge](https://pagarme-challenge.herokuapp.com)
